@@ -42,18 +42,23 @@ def write_to_md_file(file_path, content):
     except Exception as e:
         print(f"Error writing to file {file_path}: {e}")
 
-content_data = read_content_json("DraftsExport-2024-04-28-21-01.draftsexport")
-if content_data:
-    export_folder = "export"
-    if not os.path.exists(export_folder):
-        os.makedirs(export_folder)
+def main():
+    json_file_name = input("Enter the backup file name to convert: ")
+    content_data = read_content_json(json_file_name)
+    if content_data:
+        export_folder = "export"
+        if not os.path.exists(export_folder):
+            os.makedirs(export_folder)
 
-    for index, item in enumerate(content_data, start=1):
-        markdown_content = json_to_markdown(item)
-        created_at = item.get("created_at", "")
-        if created_at:
-            file_name = f"template-{created_at.replace(':', '-').replace('T', '-').replace('Z', '')}-{index}.md"
-            file_path = os.path.join(export_folder, file_name)
-            write_to_md_file(file_path, markdown_content)
-        else:
-            print(f"No 'created_at' field found in template data {index}.")
+        for index, item in enumerate(content_data, start=1):
+            markdown_content = json_to_markdown(item)
+            created_at = item.get("created_at", "")
+            if created_at:
+                file_name = f"{created_at.replace(':', '-').replace('T', '-').replace('Z', '')}-{index}.md"
+                file_path = os.path.join(export_folder, file_name)
+                write_to_md_file(file_path, markdown_content)
+            else:
+                print(f"No 'created_at' field found in template data {index}.")
+
+if __name__ == "__main__":
+    main()
