@@ -22,7 +22,7 @@ def json_to_markdown(data):
 
     markdown_content = "---\n"
     for key, value in data.items():
-        if key not in ["flagged", "folder", "content", "tags"]:
+        if key not in ["content", "tags"]:
             markdown_content += f"{key}: {value}\n"
     markdown_content += "---\n\n"
 

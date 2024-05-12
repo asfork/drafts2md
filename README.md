@@ -4,7 +4,6 @@ This script converts backup files from [Drafts](https://getdrafts.com/) into Mar
 - Reads JSON data from a `*.draftsExport` file.
 - Converts backup file into Markdown format.
 - Exports each draft as an individual Markdown file.
-- Ignores unnecessary keys in JSON data during conversion.
 
 ## Requirements
 - Python 3.x
